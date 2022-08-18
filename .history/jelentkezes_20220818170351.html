@@ -1,0 +1,250 @@
+<!DOCTYPE html public "-//w3c//dtd html 4.0 transitional//en">
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta NAME="author" CONTENT="Tóth Brigitta">
+    <meta NAME="copyright" CONTENT="Az oldal csak beadandó céljából készült, nincs köze a valósághoz.">
+    <link rel="icon" href="KÉPEK/favicon/kamera.favicon.png" type="image/x-icon">
+    <title>TB fényképész</title>
+    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+    <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
+    <script src="jquery-3.5.1.min.js"></script>
+    <script src="jquery.validate.js"></script>
+
+<!-- ŰRLAP VALIDÁLÁS -->
+<script>
+      $(document).ready(function(){
+$("#form").validate({
+                rules: {
+                    vnév: "required",
+                    knév: "required",
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    tszám: "required",
+                },
+
+                messages: {
+                    vnév: " Írd be a keresztneved!",
+                    knév: " Írd be a vezetékneved!",
+                    email: " Kérlek valós email címet adj meg!",
+                    tszám: " Kérlek add meg a telefonszámod",
+                },
+            });
+        });
+</script>
+
+<!-- SZÁMOLÁS -->
+<script>
+function számolás(){
+  var összesen=0;
+  var eredmeny=0;
+  var a= document.getElementById("résztvevők").selectedIndex;
+
+  if(document.getElementById("esküvő").checked){összesen=50000;}
+			if(document.getElementById("természet").checked){összesen=20000;}
+      if(document.getElementById("stúdió").checked){összesen=30000;}
+      
+      if (a==1) {eredmeny=10000}
+      if (a==2) {eredmeny=20000}
+      if (a==3) {eredmeny=30000}
+      if (a==4) {eredmeny=40000}
+      if (a==5) {eredmeny=50000}
+
+
+      document.getElementById("ár").value=összesen+eredmeny;
+}
+</script>
+</head>
+
+  
+<body>
+ <!-- CÍM -->
+<div class="row">
+        <div class="col-12 col-t-12">
+      <header>
+        <p><h1>Capture</h1></p>
+      </header>
+    </div>
+</div>
+   
+
+<!-- NAV BAR -->
+ <nav>
+  <ul>
+      <li class="col-3 col-t-2" ><a href="index.html" >Kezdőlap</a></li>
+      <li class="col-3 col-t-2" ><a href="bemutatkozas.html" >Bemutatkozás</a></li>
+      <li class="col-3 col-t-2" ><a href="galeria.html" >Galéria</a></li>
+  </ul>
+</nav>
+
+<nav class="col-3 col-t-12 dropdown">
+      <ul><li>
+          <p>Elérhetőségek</p>
+      </li></ul>
+<div class="col-12 col-t-12 dropdown-content">
+<ul>
+  <li><a href="#" class="active">Jelentkezés</a></li>
+</ul>
+<ul>
+  <li><a href="kapcsolat.html">Kapcsolat</a></li>
+</ul>
+</div>
+</nav>
+
+
+<!-- FORM -->
+    <div class="row">
+    <div class="col-12 col-t-12">
+      <section>
+        <h2 class="urlap_h2">Lépjen kapcsolatba velünk:</h2>
+    <form
+      action="http://szamtud.uni-corvinus.hu/~blang/receive.php" method="POST" id="form" novalidate >
+    
+      <table >
+        <tr>
+          <td colspan="2">
+            <h3>Alap információk</h3>
+            <label>Vezetéknév:</label>
+            <input
+              type="text"
+              class="textbox"
+              name="vnév"
+              id="vnév"
+              size="60"/>
+            <br />
+
+            <label>Keresztnév:</label>
+            <input
+              type="text"
+              class="textbox"
+              name="knév"
+              id="knév"
+              size="60"/>
+            <br />
+
+            <label>Telefonszám:</label>
+            <input
+              type="text"
+              class="textbox"
+              name="tszám"
+              id="tszám"
+              placeholder="06-20-123-4567"
+              size="60"/>
+            <br />
+
+            <label>Email:</label>
+            <input
+              type="email"
+              placeholder="pelda@email.hu"
+              name="email"
+              id="email"
+              size=60;/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Milyen szolgáltatást szeretne igénybe venni?</p>
+            <label>
+              <input type="radio" name="esküvő" id="esküvő" value="esküvő" />
+              Esküvői fotózás
+            </label>
+            <br />
+
+            <label>
+              <input type="radio" name="természet" id="természet" value="esküvő" />
+              Potrér fotózás természetben
+            </label>
+            <br />
+
+            <label>
+              <input type="radio" name="studió" id="stúdió" value="esküvő" />
+              Portré fotózás stúdióban
+            </label>
+            <br />
+          </td>
+        
+        
+          <td>
+            <label><p> Hányan vennének részt?</p> <br>
+            <select id="résztvevők" name="lista">
+              <option><div class=""></div></option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">4+</option>
+            </select></label>
+          </td>
+        </tr>
+        <tr>
+          <tr>
+          <td colspan="2">
+            <label>A kiválasztott szolgáltatás ára:
+              <input type="text" name="ár" id="ár" size="8"> Ft</label>
+              <input type="button" value="Számol" onclick="számolás()">
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <label>Mikor szeretnének részt venni a fotózáson?</label>
+            <input type="date" name="dátum" id="dátum">
+          </td>
+        </tr>
+          <td colspan="2">
+            <input
+              type="submit"
+              value="Elküld"
+              placeholder="Elküld"
+              value="elküld"
+            />
+            <input
+              type="reset"
+              value="Töröl"
+              placeholder="Töröl"
+              value="töröl"
+            />
+          </td>
+        </tr>
+      </table>
+      
+    </form>
+  </section>
+  </div>
+</div>
+
+<!-- ASIDE 1 -->
+<div class="col-6 col-t-6">
+  <aside class="urlap_aside">
+      <p>Minden leadott jelentkezést 48 órán belül feldolgozunk és visszajelzést küldünk róla.
+      </p>
+      <p>Ha a jelentkezési lapon túl lenne más különleges kérés, azt emailben vagy telefonon jelezzék.</p>
+
+      <h3>Kérjük minden mezőt töltsön ki</h3>
+  </aside>
+</div>
+
+
+<!-- ASIDE 2 -->
+<div class="col-6 col-t-6">
+<aside class="urlap_aside">
+  <p>Ha igényes és szeretettel teli környezetben szeretne eltölteni pár órát mindeképpen minket válasszon!</p>
+   <h3>Köszönjük, hogy minket választott!</h3>
+</aside>
+</div>
+
+<!-- Footer -->
+ <div class="row">
+  <div class="col-12 col-t-12">
+    <footer>
+        Készítette: Tóth Brigitta, 2020. november, Budapesti Corvinus Egyetem
+     </footer>
+    </div>
+  </div>
+
+  </body>
+</html>
